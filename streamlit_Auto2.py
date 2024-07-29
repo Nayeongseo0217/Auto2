@@ -3,7 +3,6 @@ import streamlit as st
 import smtplib
 from email.mime.text import MIMEText
 import time
-import streamlit.components.v1 as components
 
 # 페이지 구성을 설정합니다.
 st.set_page_config(page_title="Auto Connect Chat Bot",  page_icon="https://ifh.cc/g/P8K9BV.png", layout="centered", initial_sidebar_state="expanded")
@@ -55,33 +54,6 @@ st.markdown("""
 -> 전화 상담 : 010 - 4433 - 1708
 """, unsafe_allow_html=True)
 
-# HTML and JavaScript for the popup
-popup_html = """
-<div id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-                        width: 300px; height: 200px; background: white; border: 1px solid #ddd; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-    <div style="padding: 20px;">
-        <h4>Popup Window</h4>
-        <p>This is a popup window.</p>
-        <button onclick="closePopup()">Close Popup</button>
-    </div>
-</div>
-
-<script>
-function openPopup() {
-    document.getElementById('popup').style.display = 'block';
-}
-
-function closePopup() {
-    document.getElementById('popup').style.display = 'none';
-}
-</script>
-"""
-
-if st.button("버튼으로 자동차 선택하기"):
-    components.html(popup_html + "<script>openPopup()</script>", height=300)
-
-# Include the popup HTML in the page (this ensures the popup HTML is loaded)
-components.html(popup_html, height=0)
 
 API_KEY = st.secrets['OPENAI_API_KEY']
 
@@ -95,27 +67,6 @@ if 'thread_id' not in st.session_state:
 
 thread_id = st.session_state.thread_id
 assistant_id = "asst_GyHpEq4rKyMTSm05AbShypNc"  # 사용자 정의 어시스턴트 ID
-
-# # 스레드에서 이전 메시지 가져오기
-# thread_messages = client.beta.threads.messages.list(thread_id, order="asc")
-
-# # 이전 메시지 출력
-# for msg in thread_messages.data:
-#     role = "나" if msg.role == "user" else "오토커넥트 챗봇"
-#     if msg.role == "user":
-#         st.markdown(
-#             f'<div style="text-align: right; margin-bottom: 10px;">'
-#             f'<div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #F2F2F2; max-width: 70%;">'
-#             f'{msg.content[0].text.value}</div></div>',
-#             unsafe_allow_html=True
-#         )
-#     else:
-#         st.markdown(
-#             f'<div style="text-align: left; margin-bottom: 10px;">'
-#             f'<div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #A0B4F2; max-width: 70%;">'
-#             f'<strong>{role}<br>:</strong> {msg.content[0].text.value}</div></div>',
-#             unsafe_allow_html=True
-#         )
 
 # 새로운 메시지 입력
 prompt = st.chat_input("오토커넥트 챗봇에게 물어보세요!")
