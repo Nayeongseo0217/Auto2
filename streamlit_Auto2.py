@@ -77,10 +77,7 @@ function closePopup() {
 </script>
 """
 
-# Streamlit app layout
-st.title("Streamlit Popup Example")
-
-if st.button("Open Popup"):
+if st.button("버튼으로 자동차 선택하기"):
     components.html(popup_html + "<script>openPopup()</script>", height=300)
 
 # Include the popup HTML in the page (this ensures the popup HTML is loaded)
@@ -129,8 +126,6 @@ if prompt:
         role="user",
         content=prompt,
     )
-    with st.chat_message(message.role):
-        st.write(message.content[0].text.value)
 
     # 어시스턴트 응답 실행
     run = client.beta.threads.runs.create(
