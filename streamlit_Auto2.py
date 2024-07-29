@@ -2028,9 +2028,6 @@ if 'thread_id' not in st.session_state:
 thread_id = st.session_state.thread_id
 assistant_id = "asst_GyHpEq4rKyMTSm05AbShypNc"  # 사용자 정의 어시스턴트 ID
 
-st.header("오토커넥트 챗봇 1차")
-st.write("**웹 서비스 UI는 언제든지 바뀔 수 있습니다!**")
-
 # 스레드에서 이전 메시지 가져오기
 thread_messages = client.beta.threads.messages.list(thread_id, order="asc")
 
@@ -2079,15 +2076,30 @@ if prompt:
             )
 
     # 어시스턴트의 응답 메시지 가져오기
-    message = client.beta.threads.messages.list(
+    messages = client.beta.threads.messages.list(
         thread_id=thread_id,
     )
 
     # 어시스턴트의 응답 메시지 출력
-    with st.chat_message(message.data[0].role):
-        st.write(message.data[0].content[0].text.value)
+    for msg in messages.data:
+        role = "나" if msg.role == "user" else "오토커넥트 챗봇"
+        if msg.role == "user":
+            st.markdown(
+                f'<div style="text-align: right; margin-bottom: 10px;">'
+                f'<div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #F2F2F2; max-width: 70%;">'
+                f'{msg.content[0].text.value}</div></div>',
+                unsafe_allow_html=True
+            )
+        else:
+            st.markdown(
+                f'<div style="text-align: left; margin-bottom: 10px;">'
+                f'<div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #A0B4F2; max-width: 70%;">'
+                f'<strong>{role}<br>:</strong> {msg.content[0].text.value}</div></div>',
+                unsafe_allow_html=True
+            )
 
     print(run)
     print(message)
 
 # st.markdown("<hr>", unsafe_allow_html=True)
+st.write("**웹 서비스 UI는 언제든지 바뀔 수 있습니다!**")
