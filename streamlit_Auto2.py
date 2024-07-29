@@ -121,12 +121,14 @@ if st.session_state['show_modal']:
         const closeModalBtn = window.parent.document.getElementById('close-modal');
         if (closeModalBtn) {
             closeModalBtn.onclick = function() {
-                fetch('/close-modal')
-                .then(response => {
-                    if (response.ok) {
-                        window.location.reload();
+                const streamlitContainer = window.parent.document.querySelector('section.main');
+                if (streamlitContainer) {
+                    streamlitContainer.innerHTML += '<button id="hidden-close-btn" style="display:none;">Close</button>';
+                    const hiddenCloseBtn = window.parent.document.getElementById('hidden-close-btn');
+                    if (hiddenCloseBtn) {
+                        hiddenCloseBtn.click();
                     }
-                });
+                }
             };
         }
         </script>
@@ -134,16 +136,8 @@ if st.session_state['show_modal']:
         unsafe_allow_html=True
     )
 
-# 닫기 버튼을 위한 Streamlit 액션
-if st.session_state['show_modal']:
-    st.experimental_set_query_params(close_modal=True)
-
-# URL 매개변수를 통해 모달 창을 닫기
-if st.experimental_get_query_params().get("close_modal"):
-    close_modal()
-    st.experimental_set_query_params(close_modal=None)
-
-st.markdown("<hr>", unsafe_allow_html=True)
+    if st.button('모달 닫기', key='hidden-close-btn', on_click=close_modal):
+        pass
 
 API_KEY = st.secrets['OPENAI_API_KEY']
 
