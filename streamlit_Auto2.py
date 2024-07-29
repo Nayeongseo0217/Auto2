@@ -3,6 +3,7 @@ import streamlit as st
 import smtplib
 from email.mime.text import MIMEText
 import time
+import streamlit.components.v1 as components
 
 # 페이지 구성을 설정합니다.
 st.set_page_config(page_title="Auto Connect Chat Bot",  page_icon="https://ifh.cc/g/P8K9BV.png", layout="centered", initial_sidebar_state="expanded")
@@ -54,90 +55,36 @@ st.markdown("""
 -> 전화 상담 : 010 - 4433 - 1708
 """, unsafe_allow_html=True)
 
-# 모달 창 표시 여부를 위한 상태 변수
-if 'show_modal' not in st.session_state:
-    st.session_state['show_modal'] = False
+# HTML and JavaScript code for popup
+popup_html = """
+<div id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                        width: 300px; height: 200px; background: white; border: 1px solid #ddd; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+    <div style="padding: 20px;">
+        <h4>Popup Window</h4>
+        <p>This is a popup window.</p>
+        <button onclick="closePopup()">Close Popup</button>
+    </div>
+</div>
 
-# 모달 창을 여는 버튼
-if st.button('팝업창 열기'):
-    st.session_state['show_modal'] = True
+<script>
+function openPopup() {
+    document.getElementById('popup').style.display = 'block';
+}
 
-# 모달 창 닫기 버튼을 처리하기 위한 함수
-def close_modal():
-    st.session_state['show_modal'] = False
+function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+}
+</script>
+"""
 
-# 페이지의 다른 부분
-st.write("여기는 기본 페이지 내용입니다.")
+# Streamlit app layout
+st.title("Streamlit Popup Example")
 
-# 배경 흐리기 및 모달 창 표시
-if st.session_state['show_modal']:
-    st.markdown(
-        """
-        <style>
-        .modal {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            z-index: 1001;
-        }
-        .modal-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            z-index: 1000;
-        }
-        .stApp {
-            pointer-events: none;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
+if st.button("Open Popup"):
+    components.html(popup_html + "<script>openPopup()</script>", height=0)
 
-    st.markdown(
-        """
-        <div class="modal-background"></div>
-        <div class="modal">
-            <h2>팝업 창</h2>
-            <p>이것은 Streamlit의 모달 팝업 창입니다.</p>
-            <button id="close-modal" style="background-color: #A0B4F2; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 10px;">닫기</button>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-    # JavaScript 코드로 모달 창 닫기 버튼 클릭 이벤트 핸들러 추가
-    st.markdown(
-        """
-        <script>
-        const closeModalBtn = window.parent.document.getElementById('close-modal');
-        if (closeModalBtn) {
-            closeModalBtn.onclick = function() {
-                const streamlitContainer = window.parent.document.querySelector('section.main');
-                if (streamlitContainer) {
-                    streamlitContainer.innerHTML += '<button id="hidden-close-btn" style="display:none;">Close</button>';
-                    const hiddenCloseBtn = window.parent.document.getElementById('hidden-close-btn');
-                    if (hiddenCloseBtn) {
-                        hiddenCloseBtn.click();
-                    }
-                }
-            };
-        }
-        </script>
-        """,
-        unsafe_allow_html=True
-    )
-
-    if st.button('모달 닫기', key='hidden-close-btn', on_click=close_modal):
-        pass
+# Include the popup HTML in the page (this ensures the popup HTML is loaded)
+components.html(popup_html, height=0)
 
 API_KEY = st.secrets['OPENAI_API_KEY']
 
