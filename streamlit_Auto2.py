@@ -66,6 +66,9 @@ if st.button('팝업창 열기'):
 def close_modal():
     st.session_state['show_modal'] = False
 
+# 페이지의 다른 부분
+st.write("여기는 기본 페이지 내용입니다.")
+
 # 배경 흐리기 및 모달 창 표시
 if st.session_state['show_modal']:
     st.markdown(
@@ -98,20 +101,24 @@ if st.session_state['show_modal']:
 
     st.markdown(
         """
+        <div class="modal-background"></div>
         <div class="modal">
             <h2>팝업 창</h2>
             <p>이것은 Streamlit의 모달 팝업 창입니다.</p>
-            <button onclick="window.location.reload()">닫기</button>
+            <button onClick="fetch('/close_modal').then(() => window.location.reload())">닫기</button>
         </div>
-        <div class="modal-background"></div>
         """,
         unsafe_allow_html=True
     )
 
-# 닫기 버튼을 사용하여 모달 창 닫기
-if st.session_state['show_modal']:
-    if st.button('닫기', on_click=close_modal):
-        pass
+    # 닫기 버튼을 위한 Streamlit 액션
+    if st.button('모달 닫기', key='modal_close'):
+        close_modal()
+
+# 모달 창 닫기 처리를 위한 URL 핸들러
+if 'close_modal' in st.experimental_get_query_params():
+    close_modal()
+    st.experimental_set_query_params(close_modal=None)
 
 st.markdown("<hr>", unsafe_allow_html=True)
 
