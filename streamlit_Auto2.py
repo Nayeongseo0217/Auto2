@@ -56,6 +56,94 @@ st.markdown("""
 
 st.markdown("<hr>", unsafe_allow_html=True)
 
+API_KEY = st.secrets['OPENAI_API_KEY']
+
+# OpenAI 클라이언트 초기화
+client = openai.OpenAI(api_key=API_KEY)
+
+# 스레드 관리용 session_state 초기화
+if 'thread_id' not in st.session_state:
+    thread = client.beta.threads.create()
+    st.session_state.thread_id = thread.id
+
+thread_id = st.session_state.thread_id
+assistant_id = "asst_GyHpEq4rKyMTSm05AbShypNc"  # 사용자 정의 어시스턴트 ID
+
+# 스레드에서 이전 메시지 가져오기
+thread_messages = client.beta.threads.messages.list(thread_id, order="asc")
+
+# 이전 메시지 출력
+for msg in thread_messages.data:
+    role = "나" if msg.role == "user" else "오토커넥트 챗봇"
+    if msg.role == "user":
+        st.markdown(
+            f'<div style="text-align: right; margin-bottom: 10px;">'
+            f'<div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #F2F2F2; max-width: 70%;">'
+            f'{msg.content[0].text.value}</div></div>',
+            unsafe_allow_html=True
+        )
+    else:
+        st.markdown(
+            f'<div style="text-align: left; margin-bottom: 10px;">'
+            f'<div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #A0B4F2; max-width: 70%;">'
+            f'<strong>{role}<br>:</strong> {msg.content[0].text.value}</div></div>',
+            unsafe_allow_html=True
+        )
+
+# 새로운 메시지 입력
+prompt = st.chat_input("오토커넥트 챗봇에게 물어보세요!")
+if prompt:
+    # 사용자의 메시지 스레드에 추가
+    message = client.beta.threads.messages.create(
+        thread_id=thread_id,
+        role="user",
+        content=prompt,
+    )
+    with st.chat_message(message.role):
+        st.write(message.content[0].text.value)
+
+    # 어시스턴트 응답 실행
+    run = client.beta.threads.runs.create(
+        thread_id=thread_id,
+        assistant_id=assistant_id,
+    )
+
+    with st.spinner('오토커넥트 챗봇이 답변하는 중...'):
+        while run.status != "completed":
+            time.sleep(0.2)
+            run = client.beta.threads.runs.retrieve(
+                thread_id=thread_id,
+                run_id=run.id
+            )
+
+    # 어시스턴트의 응답 메시지 가져오기
+    messages = client.beta.threads.messages.list(
+        thread_id=thread_id,
+    )
+
+    # 어시스턴트의 응답 메시지 출력
+    for msg in messages.data:
+        role = "나" if msg.role == "user" else "오토커넥트 챗봇"
+        if msg.role == "user":
+            st.markdown(
+                f'<div style="text-align: right; margin-bottom: 10px;">'
+                f'<div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #F2F2F2; max-width: 70%;">'
+                f'{msg.content[0].text.value}</div></div>',
+                unsafe_allow_html=True
+            )
+        else:
+            st.markdown(
+                f'<div style="text-align: left; margin-bottom: 10px;">'
+                f'<div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #A0B4F2; max-width: 70%;">'
+                f'<strong>{role}<br>:</strong> {msg.content[0].text.value}</div></div>',
+                unsafe_allow_html=True
+            )
+
+    print(run)
+    print(message)
+
+st.markdown("<hr>", unsafe_allow_html=True)
+
 if "button_state" not in st.session_state:
     st.session_state.button_state = "main"
     st.markdown("<hr>", unsafe_allow_html=True)
@@ -2015,91 +2103,5 @@ def send_email4(name, email, phone, gender_age, car_brand, mileage, additional_i
 
 handle_buttons()
 
-API_KEY = st.secrets['OPENAI_API_KEY']
-
-# OpenAI 클라이언트 초기화
-client = openai.OpenAI(api_key=API_KEY)
-
-# 스레드 관리용 session_state 초기화
-if 'thread_id' not in st.session_state:
-    thread = client.beta.threads.create()
-    st.session_state.thread_id = thread.id
-
-thread_id = st.session_state.thread_id
-assistant_id = "asst_GyHpEq4rKyMTSm05AbShypNc"  # 사용자 정의 어시스턴트 ID
-
-# 스레드에서 이전 메시지 가져오기
-thread_messages = client.beta.threads.messages.list(thread_id, order="asc")
-
-# 이전 메시지 출력
-for msg in thread_messages.data:
-    role = "나" if msg.role == "user" else "오토커넥트 챗봇"
-    if msg.role == "user":
-        st.markdown(
-            f'<div style="text-align: right; margin-bottom: 10px;">'
-            f'<div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #F2F2F2; max-width: 70%;">'
-            f'{msg.content[0].text.value}</div></div>',
-            unsafe_allow_html=True
-        )
-    else:
-        st.markdown(
-            f'<div style="text-align: left; margin-bottom: 10px;">'
-            f'<div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #A0B4F2; max-width: 70%;">'
-            f'<strong>{role}<br>:</strong> {msg.content[0].text.value}</div></div>',
-            unsafe_allow_html=True
-        )
-
-# 새로운 메시지 입력
-prompt = st.chat_input("오토커넥트 챗봇에게 물어보세요!")
-if prompt:
-    # 사용자의 메시지 스레드에 추가
-    message = client.beta.threads.messages.create(
-        thread_id=thread_id,
-        role="user",
-        content=prompt,
-    )
-    with st.chat_message(message.role):
-        st.write(message.content[0].text.value)
-
-    # 어시스턴트 응답 실행
-    run = client.beta.threads.runs.create(
-        thread_id=thread_id,
-        assistant_id=assistant_id,
-    )
-
-    with st.spinner('오토커넥트 챗봇이 답변하는 중...'):
-        while run.status != "completed":
-            time.sleep(0.2)
-            run = client.beta.threads.runs.retrieve(
-                thread_id=thread_id,
-                run_id=run.id
-            )
-
-    # 어시스턴트의 응답 메시지 가져오기
-    messages = client.beta.threads.messages.list(
-        thread_id=thread_id,
-    )
-
-    # 어시스턴트의 응답 메시지 출력
-    for msg in messages.data:
-        role = "나" if msg.role == "user" else "오토커넥트 챗봇"
-        if msg.role == "user":
-            st.markdown(
-                f'<div style="text-align: right; margin-bottom: 10px;">'
-                f'<div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #F2F2F2; max-width: 70%;">'
-                f'{msg.content[0].text.value}</div></div>',
-                unsafe_allow_html=True
-            )
-        else:
-            st.markdown(
-                f'<div style="text-align: left; margin-bottom: 10px;">'
-                f'<div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #A0B4F2; max-width: 70%;">'
-                f'<strong>{role}<br>:</strong> {msg.content[0].text.value}</div></div>',
-                unsafe_allow_html=True
-            )
-
-    print(run)
-    print(message)
-
 # st.markdown("<hr>", unsafe_allow_html=True)
-st.write("**웹 서비스 UI는 언제든지 바뀔 수 있습니다!**")
+st.write("웹 서비스 UI는 언제든지 바뀔 수 있습니다!")
