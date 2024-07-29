@@ -55,7 +55,7 @@ st.markdown("""
 -> 전화 상담 : 010 - 4433 - 1708
 """, unsafe_allow_html=True)
 
-# HTML and JavaScript code for popup
+# HTML and JavaScript for the popup
 popup_html = """
 <div id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
                         width: 300px; height: 200px; background: white; border: 1px solid #ddd; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
@@ -81,7 +81,7 @@ function closePopup() {
 st.title("Streamlit Popup Example")
 
 if st.button("Open Popup"):
-    components.html(popup_html + "<script>openPopup()</script>", height=0)
+    components.html(popup_html + "<script>openPopup()</script>", height=300)
 
 # Include the popup HTML in the page (this ensures the popup HTML is loaded)
 components.html(popup_html, height=0)
