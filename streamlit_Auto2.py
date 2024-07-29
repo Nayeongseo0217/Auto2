@@ -54,6 +54,7 @@ st.markdown("""
 -> 전화 상담 : 010 - 4433 - 1708
 """, unsafe_allow_html=True)
 
+# 모달 창 표시 여부를 위한 상태 변수
 if 'show_modal' not in st.session_state:
     st.session_state['show_modal'] = False
 
@@ -65,7 +66,10 @@ if st.button('팝업창 열기'):
 def close_modal():
     st.session_state['show_modal'] = False
 
-# 배경 흐리기
+# 페이지의 다른 부분
+st.write("여기는 기본 페이지 내용입니다.")
+
+# 배경 흐리기 및 모달 창 표시
 if st.session_state['show_modal']:
     st.markdown(
         """
@@ -91,10 +95,16 @@ if st.session_state['show_modal']:
             z-index: 1000;
         }
         </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+    st.markdown(
+        """
         <div class="modal">
             <h2>팝업 창</h2>
             <p>이것은 Streamlit의 모달 팝업 창입니다.</p>
-            <button onclick="window.location.href='?close_modal=true'">닫기</button>
+            <button onclick="window.location.reload()">닫기</button>
         </div>
         <div class="modal-background"></div>
         """,
@@ -102,7 +112,8 @@ if st.session_state['show_modal']:
     )
 
 if st.button('닫기', on_click=close_modal):
-    pass
+    if st.button('닫기', on_click=close_modal):
+        pass
 
 st.markdown("<hr>", unsafe_allow_html=True)
 
