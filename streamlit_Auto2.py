@@ -108,16 +108,40 @@ if st.session_state['show_modal']:
         <div class="modal">
             <h2>팝업 창</h2>
             <p>이것은 Streamlit의 모달 팝업 창입니다.</p>
-            <button onClick="window.parent.document.querySelector('button[aria-label=close]').click()">닫기</button>
+            <button id="close-modal" style="background-color: #A0B4F2; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 10px;">닫기</button>
         </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # JavaScript 코드로 모달 창 닫기 버튼 클릭 이벤트 핸들러 추가
+    st.markdown(
+        """
+        <script>
+        const closeModalBtn = window.parent.document.getElementById('close-modal');
+        if (closeModalBtn) {
+            closeModalBtn.onclick = function() {
+                fetch('/close-modal')
+                .then(response => {
+                    if (response.ok) {
+                        window.location.reload();
+                    }
+                });
+            };
+        }
+        </script>
         """,
         unsafe_allow_html=True
     )
 
 # 닫기 버튼을 위한 Streamlit 액션
 if st.session_state['show_modal']:
-    if st.button('모달 닫기', key='modal_close'):
-        close_modal()
+    st.experimental_set_query_params(close_modal=True)
+
+# URL 매개변수를 통해 모달 창을 닫기
+if st.experimental_get_query_params().get("close_modal"):
+    close_modal()
+    st.experimental_set_query_params(close_modal=None)
 
 st.markdown("<hr>", unsafe_allow_html=True)
 
