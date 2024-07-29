@@ -94,6 +94,9 @@ if st.session_state['show_modal']:
             background-color: rgba(0,0,0,0.5);
             z-index: 1000;
         }
+        .stApp {
+            pointer-events: none;
+        }
         </style>
         """,
         unsafe_allow_html=True
@@ -105,20 +108,16 @@ if st.session_state['show_modal']:
         <div class="modal">
             <h2>팝업 창</h2>
             <p>이것은 Streamlit의 모달 팝업 창입니다.</p>
-            <button onClick="fetch('/close_modal').then(() => window.location.reload())">닫기</button>
+            <button onClick="window.parent.document.querySelector('button[aria-label=close]').click()">닫기</button>
         </div>
         """,
         unsafe_allow_html=True
     )
 
-    # 닫기 버튼을 위한 Streamlit 액션
+# 닫기 버튼을 위한 Streamlit 액션
+if st.session_state['show_modal']:
     if st.button('모달 닫기', key='modal_close'):
         close_modal()
-
-# 모달 창 닫기 처리를 위한 URL 핸들러
-if 'close_modal' in st.experimental_get_query_params():
-    close_modal()
-    st.experimental_set_query_params(close_modal=None)
 
 st.markdown("<hr>", unsafe_allow_html=True)
 
