@@ -96,26 +96,26 @@ if 'thread_id' not in st.session_state:
 thread_id = st.session_state.thread_id
 assistant_id = "asst_GyHpEq4rKyMTSm05AbShypNc"  # 사용자 정의 어시스턴트 ID
 
-# 스레드에서 이전 메시지 가져오기
-thread_messages = client.beta.threads.messages.list(thread_id, order="asc")
+# # 스레드에서 이전 메시지 가져오기
+# thread_messages = client.beta.threads.messages.list(thread_id, order="asc")
 
-# 이전 메시지 출력
-for msg in thread_messages.data:
-    role = "나" if msg.role == "user" else "오토커넥트 챗봇"
-    if msg.role == "user":
-        st.markdown(
-            f'<div style="text-align: right; margin-bottom: 10px;">'
-            f'<div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #F2F2F2; max-width: 70%;">'
-            f'{msg.content[0].text.value}</div></div>',
-            unsafe_allow_html=True
-        )
-    else:
-        st.markdown(
-            f'<div style="text-align: left; margin-bottom: 10px;">'
-            f'<div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #A0B4F2; max-width: 70%;">'
-            f'<strong>{role}<br>:</strong> {msg.content[0].text.value}</div></div>',
-            unsafe_allow_html=True
-        )
+# # 이전 메시지 출력
+# for msg in thread_messages.data:
+#     role = "나" if msg.role == "user" else "오토커넥트 챗봇"
+#     if msg.role == "user":
+#         st.markdown(
+#             f'<div style="text-align: right; margin-bottom: 10px;">'
+#             f'<div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #F2F2F2; max-width: 70%;">'
+#             f'{msg.content[0].text.value}</div></div>',
+#             unsafe_allow_html=True
+#         )
+#     else:
+#         st.markdown(
+#             f'<div style="text-align: left; margin-bottom: 10px;">'
+#             f'<div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #A0B4F2; max-width: 70%;">'
+#             f'<strong>{role}<br>:</strong> {msg.content[0].text.value}</div></div>',
+#             unsafe_allow_html=True
+#         )
 
 # 새로운 메시지 입력
 prompt = st.chat_input("오토커넥트 챗봇에게 물어보세요!")
