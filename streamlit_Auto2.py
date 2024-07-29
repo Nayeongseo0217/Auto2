@@ -54,6 +54,51 @@ st.markdown("""
 -> 전화 상담 : 010 - 4433 - 1708
 """, unsafe_allow_html=True)
 
+import streamlit as st
+
+# 모달 창 표시 여부를 위한 상태 변수
+if 'show_modal' not in st.session_state:
+    st.session_state['show_modal'] = False
+
+# 모달 창을 여는 버튼
+if st.button('버튼으로 자동차 찾기'):
+    st.session_state['show_modal'] = True
+
+# 모달 창 컨테이너
+if st.session_state['show_modal']:
+    st.markdown(
+        """
+        <div style="position: fixed; 
+                    top: 50%; left: 50%; 
+                    transform: translate(-50%, -50%); 
+                    background-color: white; 
+                    padding: 20px; 
+                    border-radius: 10px; 
+                    box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+                    z-index: 1000;">
+            <h2>팝업 창</h2>
+            <p>이것은 Streamlit의 모달 팝업 창입니다.</p>
+            <button onclick="window.location.reload()">닫기</button>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # 배경 흐리기
+    st.markdown(
+        """
+        <style>
+        .stApp { 
+            opacity: 0.3; 
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+# 페이지의 다른 부분
+st.write("여기는 기본 페이지 내용입니다.")
+
 st.markdown("<hr>", unsafe_allow_html=True)
 
 API_KEY = st.secrets['OPENAI_API_KEY']
