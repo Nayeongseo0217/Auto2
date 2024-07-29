@@ -61,8 +61,9 @@ if 'show_modal' not in st.session_state:
 if st.button('팝업창 열기'):
     st.session_state['show_modal'] = True
 
-# 페이지의 다른 부분
-st.write("여기는 기본 페이지 내용입니다.")
+# 모달 창 닫기 버튼을 처리하기 위한 함수
+def close_modal():
+    st.session_state['show_modal'] = False
 
 # 배경 흐리기
 if st.session_state['show_modal']:
@@ -100,10 +101,8 @@ if st.session_state['show_modal']:
         unsafe_allow_html=True
     )
 
-# URL 매개변수를 통해 모달 창을 닫기
-if st.experimental_get_query_params().get("close_modal"):
-    st.session_state['show_modal'] = False
-    st.experimental_set_query_params(close_modal=None)
+if st.button('닫기', on_click=close_modal):
+    pass
 
 st.markdown("<hr>", unsafe_allow_html=True)
 
