@@ -147,7 +147,7 @@ if prompt:
     )
 
     # 어시스턴트의 응답 메시지 출력
-    for msg in messages.data:
+    for msg in reversed(messages.data):
         role = "나" if msg.role == "user" else "오토커넥트 챗봇"
         if msg.role == "user":
             st.markdown(
