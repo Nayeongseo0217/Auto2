@@ -84,13 +84,13 @@ if prompt:
         assistant_id=assistant_id,
     )
 
-    with st.spinner('오토커넥트 챗봇이 답변하는 중...'):
-        while run.status != "completed":
-            time.sleep(0.2)
-            run = client.beta.threads.runs.retrieve(
-                thread_id=thread_id,
-                run_id=run.id
-            )
+    
+    while run.status != "completed":
+        time.sleep(0.2)
+        run = client.beta.threads.runs.retrieve(
+            thread_id=thread_id,
+            run_id=run.id
+        )
 
     # 어시스턴트의 응답 메시지 가져오기
     messages = client.beta.threads.messages.list(
@@ -108,12 +108,13 @@ if prompt:
                 unsafe_allow_html=True
             )
         else:
-            st.markdown(
-                f'<div style="text-align: left; margin-bottom: 10px;">'
-                f'<div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #A0B4F2; max-width: 70%;">'
-                f'<strong>{role}<br>:</strong> {msg.content[0].text.value}</div></div>',
-                unsafe_allow_html=True
-            )
+            with st.spinner('오토커넥트 챗봇이 답변하는 중...'):
+                st.markdown(
+                    f'<div style="text-align: left; margin-bottom: 10px;">'
+                    f'<div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #A0B4F2; max-width: 70%;">'
+                    f'<strong>{role}<br>:</strong> {msg.content[0].text.value}</div></div>',
+                    unsafe_allow_html=True
+                )
 
     print(run)
     print(message)
