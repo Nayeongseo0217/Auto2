@@ -19,7 +19,7 @@ with st.sidebar:
     }
     )
 
-if choice == "버튼으로 차량 고르기":
+if choice == "원클릭으로 나에게 맞는 모빌리티 추천 서비스":
 
     custom_header = """
         <style>
@@ -2044,7 +2044,7 @@ if 'thread_id' not in st.session_state:
 thread_id = st.session_state.thread_id
 assistant_id = "asst_GyHpEq4rKyMTSm05AbShypNc"  # 사용자 정의 어시스턴트 ID
 
-if choice == "채팅으로 차량 상담하기":
+if choice == "온라인 상담사와 함께하는 모빌리티 컨설팅":
     custom_header = """
         <style>
         /* Streamlit 기본 헤더와 푸터 숨기기 */
@@ -2145,7 +2145,7 @@ if choice == "채팅으로 차량 상담하기":
         print(run)
         print(message)
 
-if choice == "바로 상담 신청하기":
+if choice == "상담사 바로 연결하기":
     custom_header = """
         <style>
         /* Streamlit 기본 헤더와 푸터 숨기기 */
