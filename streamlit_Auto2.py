@@ -5,6 +5,8 @@ from email.mime.text import MIMEText
 import time
 from streamlit_option_menu import option_menu
 
+st.set_page_config(page_title="Auto Connect Chat Bot",  page_icon="https://ifh.cc/g/P8K9BV.png", layout="centered", initial_sidebar_state="expanded")
+
 with st.sidebar:
     choice = option_menu("Menu", ["버튼으로 차량 고르기", "채팅으로 차량 상담하기"],
                          icons=['bi bi-hand-index-thumb', 'bi bi-chat-right-dots'],
@@ -18,8 +20,6 @@ with st.sidebar:
     )
 
 if choice == "버튼으로 차량 고르기":
-    # 페이지 구성을 설정합니다.
-    st.set_page_config(page_title="Auto Connect Chat Bot",  page_icon="https://ifh.cc/g/P8K9BV.png", layout="centered", initial_sidebar_state="expanded")
 
     custom_header = """
         <style>
@@ -2045,8 +2045,6 @@ thread_id = st.session_state.thread_id
 assistant_id = "asst_GyHpEq4rKyMTSm05AbShypNc"  # 사용자 정의 어시스턴트 ID
 
 if choice == "채팅으로 차량 상담하기":
-    st.set_page_config(page_title="Auto Connect Chat Bot",  page_icon="https://ifh.cc/g/P8K9BV.png", layout="centered", initial_sidebar_state="expanded")
-
     custom_header = """
         <style>
         /* Streamlit 기본 헤더와 푸터 숨기기 */
