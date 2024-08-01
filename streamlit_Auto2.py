@@ -8,8 +8,8 @@ from streamlit_option_menu import option_menu
 st.set_page_config(page_title="Auto Connect Chat Bot",  page_icon="https://ifh.cc/g/P8K9BV.png", layout="centered", initial_sidebar_state="expanded")
 
 with st.sidebar:
-    choice = option_menu("MENU", ["버튼으로 차량 고르기", "채팅으로 차량 상담하기", "바로 상담 신청하기"],
-                         icons=['bi bi-hand-index-thumb', 'bi bi-chat-right-dots', 'bi bi-envelope-at-fill'],
+    choice = option_menu("MENU", ["원클릭으로 나에게 맞는 모빌리티 추천 서비스", "온라인 상담사와 함께하는 모빌리티 컨설팅", "상담사 바로 연결하기"],
+                         icons=['bi bi-hand-index-fill', 'bi bi-person-circle', 'bi bi-telephone-outbound-fill'],
                          menu_icon="app-indicator", default_index=0,
                          styles={
         "container": {"padding": "4!important", "background-color": "#fafafa"},
