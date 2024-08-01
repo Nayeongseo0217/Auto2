@@ -8,8 +8,8 @@ from streamlit_option_menu import option_menu
 st.set_page_config(page_title="Auto Connect Chat Bot",  page_icon="https://ifh.cc/g/P8K9BV.png", layout="centered", initial_sidebar_state="expanded")
 
 with st.sidebar:
-    choice = option_menu("Menu", ["버튼으로 차량 고르기", "채팅으로 차량 상담하기"],
-                         icons=['bi bi-hand-index-thumb', 'bi bi-chat-right-dots'],
+    choice = option_menu("MENU", ["버튼으로 차량 고르기", "채팅으로 차량 상담하기", "바로 상담 신청하기"],
+                         icons=['bi bi-hand-index-thumb', 'bi bi-chat-right-dots', 'bi bi-envelope-at-fill'],
                          menu_icon="app-indicator", default_index=0,
                          styles={
         "container": {"padding": "4!important", "background-color": "#fafafa"},
@@ -2144,3 +2144,76 @@ if choice == "채팅으로 차량 상담하기":
 
         print(run)
         print(message)
+
+if choice == "바로 상담 신청하기":
+    def personal_consultation_form():
+        with st.form("personal_consultation"):
+            st.write("이름을 적어주세요.")
+            name = st.text_input("이름")
+            st.markdown("<hr>", unsafe_allow_html=True)
+            
+            st.write("이메일을 적어주세요.")
+            email = st.text_input("이메일")
+            st.markdown("<hr>", unsafe_allow_html=True)
+            
+            st.write("전화번호를 적어주세요.")
+            phone = st.text_input("전화번호")
+            st.markdown("<hr>", unsafe_allow_html=True)
+            
+            st.write("성별과 나이대를 적어주세요.")
+            gender_age = st.text_input("성별과 나이대")
+            st.markdown("<hr>", unsafe_allow_html=True)
+            
+            st.write("희망 차종과 브랜드를 적어주세요.")
+            car_brand = st.text_input("희망 차종과 브랜드")
+            st.markdown("<hr>", unsafe_allow_html=True)
+            
+            st.write("희망 주행거리를 입력해주세요.")
+            mileage = st.text_input("희망 주행거리")
+            st.markdown("<hr>", unsafe_allow_html=True)
+            
+            st.write("추가로 희망하는 사항을 적어주세요.")
+            additional_info = st.text_input("추가로 희망하는 사항")
+            
+            submitted = st.form_submit_button("전송")
+
+            if submitted:
+                if send_email(name, email, phone, gender_age, car_brand, mileage, additional_info):
+                    st.success("신청이 완료되었습니다!")
+                else:
+                    st.error("이메일 전송에 실패했습니다. 인터넷 연결을 다시 확인해보시거나, 다시 시도해주세요!")
+
+    def send_email(name, email, phone, gender_age, car_brand, mileage, additional_info):
+        from_address = "AutoConnectChatBot@gmail.com"  # 보내는 사람 이메일 주소
+        to_address = "nays43883@naver.com"
+        subject = "(상담 요청) 오토커넥트 챗봇에서 보낸 상담 요청 인적사항입니다"
+        
+        body = f"""
+        요청자가 선택한 컨설팅은 상담 요청입니다^^
+        
+        이름: {name}
+        이메일: {email}
+        전화번호: {phone}
+        성별과 나이대: {gender_age}
+        희망 차종과 브랜드: {car_brand}
+        희망 주행거리: {mileage}
+        추가로 희망하는 사항: {additional_info}
+        """
+        
+        msg = MIMEText(body)
+        msg["Subject"] = subject
+        msg["From"] = from_address
+        msg["To"] = to_address
+        
+        try:
+            server = smtplib.SMTP("smtp.gmail.com", 587)  # SMTP 서버 및 포트 번호
+            server.starttls()
+            server.login("AutoConnectChatBot@gmail.com", "fwbzxrgzujmkcgua")  # 로그인 정보
+            server.sendmail(from_address, to_address, msg.as_string())
+            server.quit()
+            return True
+        except Exception as e:
+            print(f"Error: {e}")
+            return False
+    
+    personal_consultation_form()
