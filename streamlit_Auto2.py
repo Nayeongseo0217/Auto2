@@ -2146,6 +2146,44 @@ if choice == "채팅으로 차량 상담하기":
         print(message)
 
 if choice == "바로 상담 신청하기":
+    custom_header = """
+        <style>
+        /* Streamlit 기본 헤더와 푸터 숨기기 */
+        #MainMenu {visibility: hidden;}
+        footer {visibility: hidden;}
+        header {visibility: hidden;}
+
+        .center-img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%; /* <- 여기가 이미지 사이즈 조절하는 곳입니다~ */
+        }
+        </style>
+    """
+    st.markdown(custom_header, unsafe_allow_html=True)
+
+    # https://ifh.cc/g/P8K9BV.png <- 오토커넥트 로고 이미지 url입니다.
+
+    image_url = "https://ifh.cc/g/P8K9BV.png"
+    st.markdown(f"""
+        <div style="text-align: center;">
+            <img src="{image_url}" class="center-img" alt="Auto Connect Logo">
+        </div>
+    """, unsafe_allow_html=True)
+
+
+    page_bg = '''
+    <style>
+    [data-testid="stAppViewContainer"] {
+        background-color: #FFFFFF;
+    }
+    </style>
+    '''
+    st.markdown(page_bg, unsafe_allow_html=True)
+
+    st.title("AUTO CONNECT CHAT BOT")
+
     def personal_consultation_form():
         with st.form("personal_consultation"):
             st.write("이름을 적어주세요.")
