@@ -2149,31 +2149,31 @@ if choice == "바로 상담 신청하기":
     def personal_consultation_form():
         with st.form("personal_consultation"):
             st.write("이름을 적어주세요.")
-            name = st.text_input("이름")
+            name = st.text_input("ex) 홍길동")
             st.markdown("<hr>", unsafe_allow_html=True)
             
             st.write("이메일을 적어주세요.")
-            email = st.text_input("이메일")
+            email = st.text_input("ex) KoreanP12345@naver.com")
             st.markdown("<hr>", unsafe_allow_html=True)
             
             st.write("전화번호를 적어주세요.")
-            phone = st.text_input("전화번호")
+            phone = st.text_input("ex) 010-1234-5678")
             st.markdown("<hr>", unsafe_allow_html=True)
             
             st.write("성별과 나이대를 적어주세요.")
-            gender_age = st.text_input("성별과 나이대")
+            gender_age = st.text_input("ex) 남자, 20대 후반")
             st.markdown("<hr>", unsafe_allow_html=True)
             
             st.write("희망 차종과 브랜드를 적어주세요.")
-            car_brand = st.text_input("희망 차종과 브랜드")
+            car_brand = st.text_input("ex) 현대 캐스퍼")
             st.markdown("<hr>", unsafe_allow_html=True)
             
             st.write("희망 주행거리를 입력해주세요.")
-            mileage = st.text_input("희망 주행거리")
+            mileage = st.text_input("ex) 2만km 이하")
             st.markdown("<hr>", unsafe_allow_html=True)
             
             st.write("추가로 희망하는 사항을 적어주세요.")
-            additional_info = st.text_input("추가로 희망하는 사항")
+            additional_info = st.text_input("ex) 중고차로 알아보고 있습니다. 주말 낮에 전화상담 가능할까요?")
             
             submitted = st.form_submit_button("전송")
 
