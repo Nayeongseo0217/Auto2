@@ -2123,6 +2123,8 @@ if choice == "온라인 상담사와 함께하는 모빌리티 컨설팅":
             thread_id=thread_id,
         )
 
+        messages = list(messages)
+
         st.markdown(
             '''
             <link rel="stylesheet" href="https://unpkg.com/ionicons@5.5.2/dist/css/ionicons.min.css">
