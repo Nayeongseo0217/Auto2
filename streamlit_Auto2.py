@@ -2148,7 +2148,7 @@ if choice == "온라인 상담사와 함께하는 모빌리티 컨설팅":
                         <div style="text-align: left; margin-bottom: 10px;">
                             <div style="display: flex; align-items: flex-start;">
                                 <div style="border-radius: 50%; width: 40px; height: 40px; background-color: #A0B4F2; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
-                                    <ion-icon name="sparkles-outline" style="font-size: 24px; color: white;"></ion-icon>
+                                    <ion-icon name="sparkles-sharp" style="font-size: 24px; color: white;"></ion-icon>
                                 </div>
                                 <div style="display: flex; flex-direction: column;">
                                     <strong>{role}</strong>
