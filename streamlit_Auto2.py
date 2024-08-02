@@ -2123,6 +2123,14 @@ if choice == "온라인 상담사와 함께하는 모빌리티 컨설팅":
             thread_id=thread_id,
         )
 
+        # 챗봇 프로필 아이콘의 인터넷 주소
+        st.markdown(
+            '''
+            <link rel="stylesheet" href="https://unpkg.com/ionicons@5.5.2/dist/css/ionicons.min.css">
+            ''',
+            unsafe_allow_html=True
+        )
+
         # 어시스턴트의 응답 메시지 출력
         for msg in reversed(messages.data):
             role = "나" if msg.role == "user" else "오토커넥트 챗봇"
@@ -2136,9 +2144,16 @@ if choice == "온라인 상담사와 함께하는 모빌리티 컨설팅":
             else:
                 with st.spinner('오토커넥트 챗봇이 답변하는 중...'):
                     st.markdown(
-                        f'<div style="text-align: left; margin-bottom: 10px;">'
-                        f'<div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #A0B4F2; max-width: 70%;">'
-                        f'<strong>{role}<br>:</strong> {msg.content[0].text.value}</div></div>',
+                        f'''
+                        <div style="text-align: left; margin-bottom: 10px; display: flex; align-items: center;">
+                            <div style="border-radius: 50%; width: 40px; height: 40px; background-color: #A0B4F2; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
+                                <ion-icon name="sparkles-outline" style="font-size: 24px; color: white;"></ion-icon>
+                            </div>
+                            <div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #A0B4F2; max-width: 70%;">
+                                <strong>{role}<br>:</strong> {msg.content[0].text.value}
+                            </div>
+                        </div>
+                        ''',
                         unsafe_allow_html=True
                     )
 
