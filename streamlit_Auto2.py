@@ -2150,7 +2150,7 @@ if choice == "온라인 상담사와 함께하는 모빌리티 컨설팅":
                                 <div style="border-radius: 50%; width: 40px; height: 40px; background-color: #A0B4F2; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
                                     <ion-icon name="sparkles-sharp" style="font-size: 24px; color: white;"></ion-icon>
                                 </div>
-                                <div style="display: flex; flex-direction: column;">
+                                <div style="display: flex; flex-direction: column; flex-grow: 1;">
                                     <strong>{role}</strong>
                                     <div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #A0B4F2; max-width: 100%;">
                                         {msg.content[0].text.value}
