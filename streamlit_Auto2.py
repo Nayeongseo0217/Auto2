@@ -2123,6 +2123,13 @@ if choice == "온라인 상담사와 함께하는 모빌리티 컨설팅":
             thread_id=thread_id,
         )
 
+        st.markdown(
+            '''
+            <link href="https://ionic.io/ionicons" rel="stylesheet">
+            ''',
+            unsafe_allow_html=True
+        )
+
         # 어시스턴트의 응답 메시지 출력
         for msg in reversed(messages.data):
             role = "나" if msg.role == "user" else "오토커넥트 챗봇"
@@ -2136,9 +2143,16 @@ if choice == "온라인 상담사와 함께하는 모빌리티 컨설팅":
             else:
                 with st.spinner('오토커넥트 챗봇이 답변하는 중...'):
                     st.markdown(
-                        f'<div style="text-align: left; margin-bottom: 10px;">'
-                        f'<div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #A0B4F2; max-width: 70%;">'
-                        f'<strong>{role}<br>:</strong> {msg.content[0].text.value}</div></div>',
+                        f'''
+                        <div style="text-align: left; margin-bottom: 10px; display: flex; justify-content: flex-start;">
+                            <div style="display: flex; align-items: center;">
+                                <ion-icon name="sparkles-outline" style="font-size: 40px; margin-right: 10px; color: #000000"></ion-icon>
+                                <div style="padding: 10px; border-radius: 10px; background-color: #A0B4F2; max-width: 70%;">
+                                    <strong>{role}<br>:</strong> {msg['content'][0]['text']['value']}
+                                </div>
+                            </div>
+                        </div>
+                        ''',
                         unsafe_allow_html=True
                     )
 
