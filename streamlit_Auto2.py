@@ -2133,8 +2133,8 @@ if choice == "온라인 상담사와 함께하는 모빌리티 컨설팅":
         # 어시스턴트의 응답 메시지 출력
         for msg in reversed(messages):
             role = "나" if msg['role'] == "user" else "오토커넥트 챗봇"
-            icon_name = "person-circle-outline" if msg['role'] == "user" else "chatbubble-ellipses-outline"
-            icon_color = "#2C62B2;" if msg['role'] == "user" else "color: #FFFFFF;"
+            icon_name = "sparkles-outline" if msg['role'] == "bot" else ""
+            icon_color = "color: #000000;" if msg['role'] == "bot" else ""
 
             if msg['role'] == "user":
                 st.markdown(
@@ -2149,7 +2149,7 @@ if choice == "온라인 상담사와 함께하는 모빌리티 컨설팅":
                         f'''
                         <div style="text-align: left; margin-bottom: 10px; display: flex; justify-content: flex-start;">
                             <div style="display: flex; align-items: center;">
-                                <ion-icon name="sparkles-outline" style="font-size: 40px; margin-right: 10px; {icon_color}"></ion-icon>
+                                <ion-icon name="{icon_name}" style="font-size: 40px; margin-right: 10px; {icon_color}"></ion-icon>
                                 <div style="padding: 10px; border-radius: 10px; background-color: #A0B4F2; max-width: 70%;">
                                     <strong>{role}<br>:</strong> {msg["content"][0]["text"]["value"]}
                                 </div>
