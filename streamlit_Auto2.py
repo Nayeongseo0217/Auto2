@@ -2132,20 +2132,23 @@ if choice == "온라인 상담사와 함께하는 모빌리티 컨설팅":
             unsafe_allow_html=True
         )
 
-        # 채팅 실시간 시간 표시 사전 설정
-        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
         # 어시스턴트의 응답 메시지 출력
         for msg in reversed(messages.data):
             role = "나" if msg.role == "user" else "오토커넥트 챗봇"
+            timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            
             if msg.role == "user":
                 st.markdown(
-                    f'<div style="text-align: right; margin-bottom: 10px;">'
-                    f'<div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #F2F2F2; max-width: 70%;">'
-                    f'{msg.content[0].text.value}</div></div>'
-                    f'''<div style="font-size: 10px; text-align: {'right' if role == '오토커넥트 챗봇' else 'left'}; margin-top: 5px;">
-                            {timestamp}
-                        </div>''',
+                    f'''
+                    <div style="text-align: right; margin-bottom: 10px;">
+                        <div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #F2F2F2; max-width: 70%;">
+                            {msg.content[0].text.value}
+                            <div style="font-size: 10px; text-align: left; margin-top: 5px;">
+                                {timestamp}
+                            </div>
+                        </div>
+                    </div>
+                    ''',
                     unsafe_allow_html=True
                 )
             else:
@@ -2161,7 +2164,7 @@ if choice == "온라인 상담사와 함께하는 모빌리티 컨설팅":
                                     <strong>{role}</strong>
                                     <div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #A0B4F2; max-width: 100%; word-wrap: break-word;">
                                         {msg.content[0].text.value}
-                                        <div style="font-size: 10px; text-align: {'right' if role == '오토커넥트 챗봇' else 'left'}; margin-top: 5px;">
+                                        <div style="font-size: 10px; text-align: right; margin-top: 5px;">
                                             {timestamp}
                                         </div>
                                     </div>
