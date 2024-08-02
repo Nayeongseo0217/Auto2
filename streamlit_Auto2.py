@@ -4,6 +4,7 @@ import smtplib
 from email.mime.text import MIMEText
 import time
 from streamlit_option_menu import option_menu
+import datetime
 
 st.set_page_config(page_title="Auto Connect Chat Bot",  page_icon="https://ifh.cc/g/P8K9BV.png", layout="centered", initial_sidebar_state="expanded")
 
@@ -2131,6 +2132,9 @@ if choice == "온라인 상담사와 함께하는 모빌리티 컨설팅":
             unsafe_allow_html=True
         )
 
+        # 채팅 실시간 시간 표시 사전 설정
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
         # 어시스턴트의 응답 메시지 출력
         for msg in reversed(messages.data):
             role = "나" if msg.role == "user" else "오토커넥트 챗봇"
@@ -2138,7 +2142,10 @@ if choice == "온라인 상담사와 함께하는 모빌리티 컨설팅":
                 st.markdown(
                     f'<div style="text-align: right; margin-bottom: 10px;">'
                     f'<div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #F2F2F2; max-width: 70%;">'
-                    f'{msg.content[0].text.value}</div></div>',
+                    f'{msg.content[0].text.value}</div></div>'
+                    f'''<div style="font-size: 10px; text-align: {'right' if role == '오토커넥트 챗봇' else 'left'}; margin-top: 5px;">
+                            {timestamp}
+                        </div>''',
                     unsafe_allow_html=True
                 )
             else:
@@ -2147,13 +2154,16 @@ if choice == "온라인 상담사와 함께하는 모빌리티 컨설팅":
                         f'''
                         <div style="text-align: left; margin-bottom: 10px;">
                             <div style="display: flex; align-items: flex-start;">
-                                <div style="border-radius: 50%; width: 40px; height: 40px; background-color: #A0B4F2; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
-                                    <ion-icon name="sparkles-sharp" style="font-size: 24px; color: white;"></ion-icon>
+                                <div style="flex-shrink: 0; border-radius: 50%; width: 40px; height: 40px; background-color: #A0B4F2; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
+                                    <ion-icon name="sparkles-outline" style="font-size: 24px; color: white;"></ion-icon>
                                 </div>
                                 <div style="display: flex; flex-direction: column; flex-grow: 1;">
                                     <strong>{role}</strong>
-                                    <div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #A0B4F2; max-width: 100%;">
+                                    <div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #A0B4F2; max-width: 100%; word-wrap: break-word;">
                                         {msg.content[0].text.value}
+                                        <div style="font-size: 10px; text-align: {'right' if role == '오토커넥트 챗봇' else 'left'}; margin-top: 5px;">
+                                            {timestamp}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
