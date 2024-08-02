@@ -2145,12 +2145,17 @@ if choice == "온라인 상담사와 함께하는 모빌리티 컨설팅":
                 with st.spinner('오토커넥트 챗봇이 답변하는 중...'):
                     st.markdown(
                         f'''
-                        <div style="text-align: left; margin-bottom: 10px; display: flex; align-items: center;">
-                            <div style="border-radius: 50%; width: 40px; height: 40px; background-color: #A0B4F2; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
-                                <ion-icon name="sparkles-outline" style="font-size: 24px; color: white;"></ion-icon>
-                            </div>
-                            <div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #A0B4F2; max-width: 70%;">
-                                <strong>{role}<br>:</strong> {msg.content[0].text.value}
+                        <div style="text-align: left; margin-bottom: 10px;">
+                            <div style="display: flex; align-items: flex-start;">
+                                <div style="border-radius: 50%; width: 40px; height: 40px; background-color: #A0B4F2; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
+                                    <ion-icon name="sparkles-outline" style="font-size: 24px; color: white;"></ion-icon>
+                                </div>
+                                <div style="display: flex; flex-direction: column;">
+                                    <strong>{role}</strong>
+                                    <div style="display: inline-block; padding: 10px; border-radius: 10px; background-color: #A0B4F2; max-width: 100%;">
+                                        {msg.content[0].text.value}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         ''',
