@@ -2125,7 +2125,7 @@ if choice == "온라인 상담사와 함께하는 모빌리티 컨설팅":
 
         st.markdown(
             '''
-            <link href="https://ionic.io/ionicons" rel="stylesheet">
+            <link rel="stylesheet" href="https://unpkg.com/ionicons@5.5.2/dist/css/ionicons.min.css">
             ''',
             unsafe_allow_html=True
         )
@@ -2148,7 +2148,7 @@ if choice == "온라인 상담사와 함께하는 모빌리티 컨설팅":
                             <div style="display: flex; align-items: center;">
                                 <ion-icon name="sparkles-outline" style="font-size: 40px; margin-right: 10px; color: #000000"></ion-icon>
                                 <div style="padding: 10px; border-radius: 10px; background-color: #A0B4F2; max-width: 70%;">
-                                    <strong>{role}<br>:</strong> {msg['content'][0]['text']['value']}
+                                    <strong>{role}<br>:</strong> {msg["content"][0]["text"]["value"]}
                                 </div>
                             </div>
                         </div>
