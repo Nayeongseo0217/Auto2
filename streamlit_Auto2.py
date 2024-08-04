@@ -2123,10 +2123,12 @@ if choice == "온라인 상담사와 함께하는 모빌리티 컨설팅":
             thread_id=thread_id,
         )
     
-        # 챗봇 프로필 아이콘의 인터넷 주소
+        # ionicons CSS 및 JS 파일 포함
         st.markdown(
             '''
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.2/ionicons.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.2/collection/components/icon/icon.min.css">
+            <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+            <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
             ''',
             unsafe_allow_html=True
         )
