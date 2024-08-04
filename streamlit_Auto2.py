@@ -2126,7 +2126,7 @@ if choice == "온라인 상담사와 함께하는 모빌리티 컨설팅":
         # 챗봇 프로필 아이콘의 인터넷 주소
         st.markdown(
             '''
-            <link rel="stylesheet" href="https://unpkg.com/ionicons@5.5.2/dist/css/ionicons.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.2/ionicons.min.css">
             ''',
             unsafe_allow_html=True
         )
@@ -2157,7 +2157,7 @@ if choice == "온라인 상담사와 함께하는 모빌리티 컨설팅":
                         <div style="text-align: left; margin-bottom: 10px;">
                             <div style="display: flex; align-items: flex-start;">
                                 <div style="flex-shrink: 0; border-radius: 50%; width: 40px; height: 40px; background-color: #A0B4F2; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
-                                    <ion-icon name="sparkles-outline" style="font-size: 24px; color: white;"></ion-icon>
+                                    <ion-icon name="sparkles-sharp" style="font-size: 24px; color: white;"></ion-icon>
                                 </div>
                                 <div style="display: flex; flex-direction: column; flex-grow: 1;">
                                     <strong>{role}</strong>
