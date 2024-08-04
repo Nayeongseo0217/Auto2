@@ -2124,14 +2124,11 @@ if choice == "온라인 상담사와 함께하는 모빌리티 컨설팅":
         )
     
         # ionicons CSS 및 JS 파일 포함
-        st.markdown(
-            '''
+        st.markdown('''
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.2/collection/components/icon/icon.min.css">
             <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
             <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-            ''',
-            unsafe_allow_html=True
-        )
+        ''', unsafe_allow_html=True)
     
         # 어시스턴트의 응답 메시지 출력
         for msg in reversed(messages.data):
@@ -2158,8 +2155,8 @@ if choice == "온라인 상담사와 함께하는 모빌리티 컨설팅":
                         f'''
                         <div style="text-align: left; margin-bottom: 10px;">
                             <div style="display: flex; align-items: flex-start;">
-                                <div style="flex-shrink: 0; border-radius: 50%; width: 40px; height: 40px; background-color: #A0B4F2; display: flex; align-items: center; justify-content: center; margin-right: 10px; position: relative;">
-                                    <ion-icon name="sparkles-sharp" style="font-size: 24px; color: white; position: absolute;"></ion-icon>
+                                <div style="flex-shrink: 0; border-radius: 50%; width: 40px; height: 40px; background-color: #A0B4F2; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
+                                    <ion-icon name="chatbubble-ellipses-outline" style="font-size: 24px; color: white;"></ion-icon>
                                 </div>
                                 <div style="display: flex; flex-direction: column; flex-grow: 1;">
                                     <strong>{role}</strong>
