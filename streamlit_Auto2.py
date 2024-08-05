@@ -75,24 +75,13 @@ if choice == "원클릭으로 나에게 맞는 모빌리티 추천 서비스":
         st.session_state.button_state = "main"
         st.markdown("<hr>", unsafe_allow_html=True)
 
-    # 버튼 생성 함수
     def create_buttons(options, current_state, back_state=None, home_state="main"):
         for option, state in options.items():
-            button_html = f"""
-            <div style="margin-bottom: 20px;">
-                <button style="display: flex; flex-direction: column; align-items: center; padding: 10px; border: none; background-color: #f0f0f0; border-radius: 5px; cursor: pointer; width: 150px;">
-                    <img src='{option[1]}' style='height: 120px; margin-bottom: 10px;'/>
-                    <span>{option[0]}</span>
-                </button>
-            </div>
-            """
-            if st.markdown(button_html, unsafe_allow_html=True):
+            if st.button(option):
                 st.session_state.button_state = state
-        
         if current_state != "main":
-            if back_state:
-                if st.button("이전으로 돌아가기"):
-                    st.session_state.button_state = back_state
+            if back_state and st.button("이전으로 돌아가기"):
+                st.session_state.button_state = back_state
             if st.button("처음으로 돌아가기"):
                 st.session_state.button_state = home_state
 
@@ -102,15 +91,15 @@ if choice == "원클릭으로 나에게 맞는 모빌리티 추천 서비스":
 
     buttons_data = {
         "main": {
-            ("신차구매 컨설팅", "https://ifh.cc/g/P8K9BV.png"): "신차구매 컨설팅",
-            ("중고차구매 컨설팅", "https://ifh.cc/g/P8K9BV.png"): "중고차구매 컨설팅",
-            ("리스렌트 승계 컨설팅", "https://ifh.cc/g/P8K9BV.png"): "리스렌트 승계 컨설팅",
-            ("A/S 사후관리 컨설팅", "https://ifh.cc/g/P8K9BV.png"): "사후관리 컨설팅",
-            ("법인 전문 컨설팅 의뢰", "https://ifh.cc/g/P8K9BV.png"): "법인 전문 컨설팅 의뢰",
-            ("상담 신청하기", "https://ifh.cc/g/P8K9BV.png"): "상담 신청하기",
+            "신차구매 컨설팅": "신차구매 컨설팅",
+            "중고차구매 컨설팅": "중고차구매 컨설팅",
+            "리스렌트 승계 컨설팅": "리스렌트 승계 컨설팅",
+            "A/S 사후관리 컨설팅": "사후관리 컨설팅",
+            "법인 전문 컨설팅 의뢰": "법인 전문 컨설팅 의뢰",
+            "상담 신청하기":"상담 신청하기",
         },
         "신차구매 컨설팅": {
-            ("국산차", "https://ifh.cc/g/P8K9BV.png"): "국산차",
+            "국산차": "국산차",
             "수입차": "수입차",
             "최신 인기차량 추천받기": "최신 인기차량 추천받기",
             "나만의 모빌리티 선택하기": "나만의 모빌리티 선택하기",
