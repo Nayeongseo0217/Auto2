@@ -115,7 +115,7 @@ if choice == "원클릭으로 나에게 맞는 모빌리티 추천 서비스":
             ("신차구매 컨설팅", "https://ifh.cc/g/P8K9BV.png"): "신차구매 컨설팅",
             ("중고차구매 컨설팅", "https://ifh.cc/g/P8K9BV.png"): "중고차구매 컨설팅",
             ("리스렌트 승계 컨설팅", "https://ifh.cc/g/P8K9BV.png"): "리스렌트 승계 컨설팅",
-            ("A/S 사후관리 컨설팅", "hhttps://ifh.cc/g/P8K9BV.png"): "사후관리 컨설팅",
+            ("A/S 사후관리 컨설팅", "https://ifh.cc/g/P8K9BV.png"): "사후관리 컨설팅",
             ("법인 전문 컨설팅 의뢰", "https://ifh.cc/g/P8K9BV.png"): "법인 전문 컨설팅 의뢰",
             ("상담 신청하기", "https://ifh.cc/g/P8K9BV.png"): "상담 신청하기",
         },
