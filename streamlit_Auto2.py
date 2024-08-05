@@ -80,7 +80,7 @@ if choice == "원클릭으로 나에게 맞는 모빌리티 추천 서비스":
             button_html = f"""
             <div style="margin-bottom: 20px;">
                 <button onclick="window.location.href='/?button_state={state}'" style="display: flex; flex-direction: column; align-items: center; padding: 10px; border: none; background-color: #f0f0f0; border-radius: 5px; cursor: pointer; width: 150px;">
-                    <img src='{option[1]}' style='height: 80px; margin-bottom: 10px;'/>
+                    <img src='{option[1]}' style='height: 120px; margin-bottom: 10px;'/>
                     <span>{option[0]}</span>
                 </button>
             </div>
