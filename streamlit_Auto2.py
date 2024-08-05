@@ -77,34 +77,33 @@ if choice == "원클릭으로 나에게 맞는 모빌리티 추천 서비스":
 
     def create_buttons(options, current_state, back_state=None, home_state="main"):
         for option, state in options.items():
-            # if st.button(option):
-            #     st.session_state.button_state = state
             button_html = f"""
-            <button onclick="window.location.href='/?button_state={state}'" style="display: flex; align-items: center; padding: 10px; border: none; background-color: #f0f0f0; border-radius: 5px; cursor: pointer;">
-                <img src='{option[1]}' style='width: 30px; height: 30px; margin-right: 10px;'/>
-                <span>{option[0]}</span>
-            </button>
+            <div style="margin-bottom: 20px;">
+                <button onclick="window.location.href='/?button_state={state}'" style="display: flex; flex-direction: column; align-items: center; padding: 10px; border: none; background-color: #f0f0f0; border-radius: 5px; cursor: pointer; width: 150px;">
+                    <img src='{option[1]}' style='height: 80px; margin-bottom: 10px;'/>
+                    <span>{option[0]}</span>
+                </button>
+            </div>
             """
             st.markdown(button_html, unsafe_allow_html=True)
         if current_state != "main":
-            # if back_state and st.button("이전으로 돌아가기"):
-            #     st.session_state.button_state = back_state
-            # if st.button("처음으로 돌아가기"):
-            #     st.session_state.button_state = home_state
             if back_state:
-                back_button_html = """
+                back_button_html = f"""
+                <div style="margin-bottom: 20px;">
                     <button onclick="window.location.href='/?button_state={back_state}'" style="padding: 10px; border: none; background-color: #f0f0f0; border-radius: 5px; cursor: pointer;">
                         이전으로 돌아가기
                     </button>
-                    """
+                </div>
+                """
                 st.markdown(back_button_html, unsafe_allow_html=True)
-                home_button_html = """
+            home_button_html = f"""
+            <div style="margin-bottom: 20px;">
                 <button onclick="window.location.href='/?button_state={home_state}'" style="padding: 10px; border: none; background-color: #f0f0f0; border-radius: 5px; cursor: pointer;">
                     처음으로 돌아가기
                 </button>
-                """
-                st.markdown(home_button_html, unsafe_allow_html=True)
-
+            </div>
+            """
+            st.markdown(home_button_html, unsafe_allow_html=True)
 
     #    "버튼 상태(함수호출 느낌)": {
     #        "버튼 이름(실제로 보이는 것)": "클릭하면 변하게 되는 버튼의 상태(상태가 변함으로 '버튼 상태(함수호출 느낌)'를 실행하게 됨)"
