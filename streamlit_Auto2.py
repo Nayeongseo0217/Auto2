@@ -75,40 +75,33 @@ if choice == "원클릭으로 나에게 맞는 모빌리티 추천 서비스":
         st.session_state.button_state = "main"
         st.markdown("<hr>", unsafe_allow_html=True)
 
-# 버튼 생성 함수
+    # 버튼 생성 함수
     def create_buttons(options, current_state, back_state=None, home_state="main"):
         for option, state in options.items():
             button_html = f"""
             <div style="margin-bottom: 20px;">
-                <form action="" method="post">
-                    <button type="submit" name="button" value="{state}" style="display: flex; flex-direction: column; align-items: center; padding: 10px; border: none; background-color: #f0f0f0; border-radius: 5px; cursor: pointer; width: 150px;">
-                        <img src='{option[1]}' style='height: 120px; margin-bottom: 10px;'/>
-                        <span>{option[0]}</span>
-                    </button>
-                </form>
+                <button onclick="window.location.href='/?button_state={state}'" style="display: flex; flex-direction: column; align-items: center; padding: 10px; border: none; background-color: #f0f0f0; border-radius: 5px; cursor: pointer; width: 150px;">
+                    <img src='{option[1]}' style='height: 120px; margin-bottom: 10px;'/>
+                    <span>{option[0]}</span>
+                </button>
             </div>
             """
             st.markdown(button_html, unsafe_allow_html=True)
-        
         if current_state != "main":
             if back_state:
                 back_button_html = f"""
                 <div style="margin-bottom: 20px;">
-                    <form action="" method="post">
-                        <button type="submit" name="button" value="{back_state}" style="padding: 10px; border: none; background-color: #f0f0f0; border-radius: 5px; cursor: pointer;">
-                            이전으로 돌아가기
-                        </button>
-                    </form>
+                    <button onclick="window.location.href='/?button_state={back_state}'" style="padding: 10px; border: none; background-color: #f0f0f0; border-radius: 5px; cursor: pointer;">
+                        이전으로 돌아가기
+                    </button>
                 </div>
                 """
                 st.markdown(back_button_html, unsafe_allow_html=True)
             home_button_html = f"""
             <div style="margin-bottom: 20px;">
-                <form action="" method="post">
-                    <button type="submit" name="button" value="{home_state}" style="padding: 10px; border: none; background-color: #f0f0f0; border-radius: 5px; cursor: pointer;">
-                        처음으로 돌아가기
-                    </button>
-                </form>
+                <button onclick="window.location.href='/?button_state={home_state}'" style="padding: 10px; border: none; background-color: #f0f0f0; border-radius: 5px; cursor: pointer;">
+                    처음으로 돌아가기
+                </button>
             </div>
             """
             st.markdown(home_button_html, unsafe_allow_html=True)
@@ -1682,8 +1675,6 @@ if choice == "원클릭으로 나에게 맞는 모빌리티 추천 서비스":
 
     def handle_buttons():
         current_state = st.session_state.get("button_state", "main")
-        if "button" in st.session_state:
-            st.session_state.button_state = st.session_state["button"]
         options = buttons_data.get(current_state, {})
         back_state = options.pop("이전으로 돌아가기", None)
         create_buttons(options, current_state, back_state)
