@@ -75,8 +75,6 @@ if choice == "원클릭으로 나에게 맞는 모빌리티 추천 서비스":
     st.markdown("<hr>", unsafe_allow_html=True)
 
     def main():
-        st.title("자동차 견적 시스템")
-
         pages = {
             "main": main_page,
             "manufacturer": manufacturer_page,
@@ -90,7 +88,7 @@ if choice == "원클릭으로 나에게 맞는 모빌리티 추천 서비스":
         pages[st.session_state.page]()
 
     def main_page():
-        st.header("자동차 제조사를 선택하세요")
+        st.write("자동차 제조사를 선택하세요")
         
         manufacturers = {
             "현대": "https://file.cartner.kr/assets/images/brand/20221214095246420.png",
@@ -155,7 +153,7 @@ if choice == "원클릭으로 나에게 맞는 모빌리티 추천 서비스":
         return img
 
     def manufacturer_page():
-        st.header(f"{st.session_state.manufacturer}의 차종을 선택하세요")
+        st.write(f"{st.session_state.manufacturer}의 차종을 선택하세요")
 
         models = {
             "현대": [
