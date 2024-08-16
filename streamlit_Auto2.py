@@ -142,7 +142,6 @@ if choice == "원클릭으로 나에게 맞는 모빌리티 추천 서비스":
                     st.experimental_rerun()
                 st.write("</div>", unsafe_allow_html=True)
             
-            # Add spacing between rows
             if (i + 1) % 5 == 0:
                 st.write("")
 
